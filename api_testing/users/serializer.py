@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User
 from .models import JobPosition
+from .models import UserJobPosition
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,13 +14,13 @@ class UserSerializer(serializers.ModelSerializer):
 class JobPositionSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPosition
-        fields = ['id', 'name', 'user']
+        fields = ['id', 'name']
+
+
+class UserJobPositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserJobPosition
+        fields = ['user', 'job_position']
 
     def create(self, validated_data):
-        return JobPosition.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.user = validated_data.get('user', instance.user)
-        instance.save()
-        return instance
+        return UserJobPosition.objects.create(**validated_data)
