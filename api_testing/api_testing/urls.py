@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 
 from users.views import UserListAPIView, UserDetailAPIView
+from users.views import JobPositionListCreateAPIView, JobPositionRetrieveUpdateDestroyAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', UserListAPIView.as_view(), name='user-list'),
-    path('users/<int:pk>/', UserDetailAPIView.as_view(), name='user-detail')
+    path('users/<int:pk>/', UserDetailAPIView.as_view(), name='user-detail'),
+    path('jobpositions/', JobPositionListCreateAPIView.as_view(), name='jobposition-list-create'),
+    path('jobpositions/<int:pk>/', JobPositionRetrieveUpdateDestroyAPIView.as_view(), name='jobposition-detail'),
 ]
